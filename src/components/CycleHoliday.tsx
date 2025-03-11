@@ -7,11 +7,11 @@ const holidays = [
     { name: "Eid al-Fitr 🌙", year: 4 },
     { name: "Halloween 🎃", year: 10 },
     { name: "New Year's Day 🎆", year: 1 },
-    { name: "Thanksgiving 🦃", year: 11 }
+    { name: "Thanksgiving 🦃", year: 11 },
 ];
 
 const alphabetSorted = [...holidays].sort((a, b) =>
-    a.name.localeCompare(b.name)
+    a.name.localeCompare(b.name),
 );
 const yearSorted = [...holidays].sort((a, b) => a.year - b.year);
 
@@ -20,7 +20,7 @@ export function CycleHoliday(): React.JSX.Element {
 
     function cycleAlphabet(): void {
         const currentIndex = alphabetSorted.findIndex(
-            (holiday) => holiday.name === currentHoliday.name
+            (holiday) => holiday.name === currentHoliday.name,
         );
         const nextIndex = (currentIndex + 1) % alphabetSorted.length;
         setCurrentHoliday(alphabetSorted[nextIndex]);
@@ -28,7 +28,7 @@ export function CycleHoliday(): React.JSX.Element {
 
     function cycleYear(): void {
         const currentIndex = yearSorted.findIndex(
-            (holiday) => holiday.name === currentHoliday.name
+            (holiday) => holiday.name === currentHoliday.name,
         );
         const nextIndex = (currentIndex + 1) % yearSorted.length;
         setCurrentHoliday(yearSorted[nextIndex]);

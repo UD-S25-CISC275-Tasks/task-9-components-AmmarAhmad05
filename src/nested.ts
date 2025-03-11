@@ -8,7 +8,7 @@ import { makeBlankQuestion } from "./objects";
  */
 export function getPublishedQuestions(questions: Question[]): Question[] {
     let newList: Question[] = questions.filter(
-        (singlequestion) => singlequestion.published
+        (singlequestion) => singlequestion.published,
     );
     return newList;
 }
@@ -39,7 +39,7 @@ export function getNonEmptyQuestions(questions: Question[]): Question[] {
  */
 export function findQuestion(
     questions: Question[],
-    id: number
+    id: number,
 ): Question | null {
     for (let i = 0; i < questions.length; i++) {
         if (id === questions[i].id) {
@@ -55,7 +55,7 @@ export function findQuestion(
  */
 export function removeQuestion(questions: Question[], id: number): Question[] {
     let newList: Question[] = questions.filter(
-        (singleQuestion) => singleQuestion.id !== id
+        (singleQuestion) => singleQuestion.id !== id,
     );
     return newList;
 }
@@ -133,7 +133,7 @@ export function makeAnswers(questions: Question[]): Answer[] {
             questionId: questions[i].id,
             text: "",
             submitted: false,
-            correct: false
+            correct: false,
         };
         answers.push(singleAnswer);
     }
@@ -173,7 +173,7 @@ export function addNewQuestion(
     questions: Question[],
     id: number,
     name: string,
-    type: QuestionType
+    type: QuestionType,
 ): Question[] {
     let newQuestion: Question = makeBlankQuestion(id, name, type);
     let newList: Question[] = [...questions, newQuestion];
@@ -188,7 +188,7 @@ export function addNewQuestion(
 export function renameQuestionById(
     questions: Question[],
     targetId: number,
-    newName: string
+    newName: string,
 ): Question[] {
     let newList: Question[] = [];
     for (let i = 0; i < questions.length; i++) {
@@ -211,7 +211,7 @@ export function renameQuestionById(
 export function changeQuestionTypeById(
     questions: Question[],
     targetId: number,
-    newQuestionType: QuestionType
+    newQuestionType: QuestionType,
 ): Question[] {
     let newList: Question[] = [];
     for (let i = 0; i < questions.length; i++) {
@@ -222,7 +222,7 @@ export function changeQuestionTypeById(
                 newList.push({
                     ...questions[i],
                     type: newQuestionType,
-                    options: []
+                    options: [],
                 });
             }
         } else {
@@ -246,7 +246,7 @@ export function editOption(
     questions: Question[],
     targetId: number,
     targetOptionIndex: number,
-    newOption: string
+    newOption: string,
 ): Question[] {
     return questions.map((question) => {
         if (question.id !== targetId) {
@@ -275,14 +275,14 @@ export function editOption(
 export function duplicateQuestionInArray(
     questions: Question[],
     targetId: number,
-    newId: number
+    newId: number,
 ): Question[] {
     return questions.flatMap((question) =>
-        question.id === targetId
-            ? [
-                  question,
-                  { ...question, id: newId, name: `Copy of ${question.name}` }
-              ]
-            : [question]
+        question.id === targetId ?
+            [
+                question,
+                { ...question, id: newId, name: `Copy of ${question.name}` },
+            ]
+        :   [question],
     );
 }
